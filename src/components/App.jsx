@@ -1,13 +1,28 @@
-import { Button } from '@mui/material'
-import { useState } from 'react'
+import { Applications, Cousers, Create, Home, Page404, Users } from '../pages'
+import Navbar from './Navbar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1 className='text-3xl text-cyan-600'>Vite + React</h1>
-      <Button variant="contained">Hello world</Button>
+      <BrowserRouter>
+        <div className='App'>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/users' element={<Users />} />
+            <Route path='/apps' element={<Applications />} />
+            <Route path='/couser' element={<Cousers />} />
+            <Route path='/users/create' element={<Create />} />
+            <Route path='/apps/create' element={<Create />} />
+            <Route path='/couser/create' element={<Create />} />
+
+
+            <Route path='*' element={<Page404 />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
   )
 }
