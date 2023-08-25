@@ -1,4 +1,4 @@
-import { Applications, Cousers, Create, Home, Page404, Users } from '../pages'
+import { Applications, Audit, Cousers, Create, Home, Page404, Users } from '../pages'
 import Navbar from './Navbar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -14,10 +14,13 @@ function App() {
             <Route path='/users' element={<Users />} />
             <Route path='/apps' element={<Applications />} />
             <Route path='/couser' element={<Cousers />} />
+            <Route path='/audits' element={<Audit />} />
+
+            <Route path='/user/:id' element={<Create />} />
+
             <Route path='/users/create' element={<Create />} />
             <Route path='/apps/create' element={<Create />} />
             <Route path='/couser/create' element={<Create />} />
-
 
             <Route path='*' element={<Page404 />} />
           </Routes>

@@ -4,6 +4,7 @@ import Create from "./Create";
 import Applications from "./Applications";
 import Users from "./Users";
 import Cousers from "./Cousers";
+import Audit from './Audit';
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     Create,
     Applications,
     Users,
-    Cousers
+    Cousers,
+    Audit
 }
