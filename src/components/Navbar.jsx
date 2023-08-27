@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 const Navbar = () => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     const nav = useNavigate();
 
     const handleChange = (event, newValue) => {

@@ -4,12 +4,14 @@ import Navbar from "./Navbar";
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import UserForm from "./UserForm";
+import ApplicationForm from "./ApplicationForm";
+import CoUserForm from "./CoUserForm";
 
 export {
     App,
     Loader,
     Navbar,
     UserForm,
-    PaymentForm,
-    Review
+    ApplicationForm,
+    CoUserForm
 }

@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import { links } from '../utils';
 import { Loader } from '../components';
+import { toast } from 'react-hot-toast';
 
 const Audit = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +15,6 @@ const Audit = () => {
         const res = await axios.get(links["audits"]);
         setAudits(res?.data?.audits);
         setLoading(false);
-        console.log(audits);
     }
 
     useEffect(() => {
@@ -23,7 +23,46 @@ const Audit = () => {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
-    };
+    }
+
+
+    async function getSingleAudits(id) {
+        try {
+            const res = await axios.get(`${links["singleAud"]}/${id}`);
+            setAudits(res?.data?.audits);
+            setLoading(false);
+            return res?.data?.audits;
+        } catch (err) {
+            toast.error(err);
+        }
+        return;
+    }
+
+    async function handleSubmit(e) {
+        if (searchTerm) {
+            const user_here = await getSingleAudits(searchTerm);
+
+            if (user_here) {
+                toast.success('Audits found for user');
+                return;
+            }
+
+            toast.error('No user found');
+        } else {
+            toast.error('Type something to search');
+        }
+    }
+
+    async function handleClick(e) {
+        setLoading(true);
+        const user_here = await getSingleAudits(e.target.value);
+
+        if (user_here) {
+            toast.success('Audits found for user.');
+        } else {
+            toast.error('No user found');
+        }
+    }
 
     return (
         <>
@@ -34,11 +73,12 @@ const Audit = () => {
                     label="Search for an audit"
                     value={searchTerm}
                     onChange={handleChange}
+                    onPaste={handleChange}
                     sx={{ width: 550 }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                <Button>
+                                <Button value={searchTerm} onClick={handleSubmit}>
                                     <SearchIcon />
                                 </Button>
                             </InputAdornment>
@@ -79,7 +119,9 @@ const Audit = () => {
                                                     {audit?.updatedAt}
                                                 </td>
                                                 <td className='text-center border-2 p-2 hover:cursor-pointer hover:text-cyan-600' >
-                                                    {audit?.user}
+                                                    <button value={audit?.user} onClick={handleClick}>
+                                                        {audit?.user}
+                                                    </button>
                                                 </td>
                                                 <td className='text-center border-2 p-2'>
                                                     {audit?.updates}

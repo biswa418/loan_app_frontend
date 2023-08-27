@@ -6,6 +6,10 @@ const links = {
     createUser: `${URL}/users/create`,
     updateUser: `${URL}/users/update`,
     audits: `${URL}/audits`,
+    singleAud: `${URL}/audit`,
+    apps: `${URL}/apps/`,
+    createApp: `${URL}/apps/create`,
+    updateApp: `${URL}/apps/update`,
 }
 
 export {

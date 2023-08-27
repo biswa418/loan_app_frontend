@@ -22,16 +22,16 @@ const Home = () => {
                         Navigate through the application and track changes.
                     </p>
 
-                    <div className='flex mt-5 justify-between'>
-                        <Card className='w-1/4 h-28 items-center flex flex-col'>
+                    <div className='flex mt-8 justify-between'>
+                        <Card className='w-1/4 h-28 pb-2 items-center flex flex-col'>
                             <FaUserCircle className='h-full text-4xl text-purple-500' />
                             User
                         </Card>
-                        <Card className='w-1/4 text-sm items-center flex flex-col'>
+                        <Card className='w-1/4 text-sm pb-2 items-center flex flex-col'>
                             <FaUserEdit className='h-full text-4xl text-purple-500' />
                             Co-User
                         </Card>
-                        <Card className='w-1/4 text-sm items-center flex flex-col'>
+                        <Card className='w-1/4 text-sm pb-2 items-center flex flex-col'>
                             <FaDochub className='h-full text-4xl text-purple-500' />
                             Application
                         </Card>

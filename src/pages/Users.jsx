@@ -4,7 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import { links } from '../utils';
 import { Loader, UserForm } from '../components';
-import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 

@@ -2,14 +2,13 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { AppBar, Box, Button, Container, CssBaseline, FormControl, FormLabel, InputLabel, MenuItem, Paper, Select, Toolbar } from '@mui/material';
 import axios from 'axios';
 import { links } from '../utils';
 import { toast } from 'react-hot-toast';
 
-export default function UserForm(props) {
+export default function CoUserForm(props) {
     const { user, heading, subHeading } = props;
     const [formData, setFormData] = React.useState({
         origin: user?.origin ?? '',
@@ -404,7 +403,7 @@ export default function UserForm(props) {
 
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <TextField name="customerId" disabled label="Customer ID" fullWidth variant="standard"
+                            <TextField name="customerId" label="Customer ID" fullWidth variant="standard"
                                 value={formData.customerId}
                                 onChange={handleChange}
                             />
