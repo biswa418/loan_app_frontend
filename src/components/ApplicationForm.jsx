@@ -11,7 +11,7 @@ import { toast } from 'react-hot-toast';
 export default function ApplicationForm(props) {
     const { app, heading, subHeading } = props;
     const [formData, setFormData] = React.useState({
-        ...app[0]
+        ...app?.[0]
     });
 
     const [doc, setDoc] = React.useState({
@@ -29,8 +29,6 @@ export default function ApplicationForm(props) {
 
     const toggleChange = (e) => {
         const { name, value } = e.target;
-
-        console.log(formData[name]);
 
         setFormData((prevState) => ({
             ...prevState,
@@ -56,8 +54,6 @@ export default function ApplicationForm(props) {
         const data = {
             ...formData
         }
-
-        console.log(data.physical_nach_data.createdAt);
 
         // make the API call
         if (subHeading === 'Create') {
@@ -97,7 +93,7 @@ export default function ApplicationForm(props) {
 
             } catch (err) {
                 toast.error(err?.response?.data?.message);
-                console.log('ere-----', err?.response);
+                // console.log('ere-----', err?.response);
             }
         }
     };
@@ -114,9 +110,15 @@ export default function ApplicationForm(props) {
                     borderBottom: (t) => `1px solid ${t.palette.divider}`,
                 }}
             >
-                <Toolbar>
+                <Toolbar className='flex justify-between'>
                     <Typography variant="h6" color="inherit" noWrap>
                         {heading}
+                    </Typography>
+
+                    <Typography variant="h6" color="purple" noWrap>
+                        <a href='/' className='text-md'>
+                            back
+                        </a>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -134,7 +136,7 @@ export default function ApplicationForm(props) {
 
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <TextField name="application_id" label="Application ID" disabled fullWidth variant="standard"
+                            <TextField name="application_id" label="Application ID" disabled={subHeading === 'Update' ? true : false} fullWidth variant="standard"
                                 value={formData?.application_id}
                                 onChange={handleChange}
                             />

@@ -3,34 +3,36 @@ import React, { useEffect, useState } from 'react'
 import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import { links } from '../utils';
-import { Loader, UserForm } from '../components';
+import { CoUserForm, Loader, UserForm } from '../components';
 import { toast } from 'react-hot-toast';
 
 
 const CoUsers = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
-    const [users, setUsers] = useState([]);
-    const [singleUser, setUser] = useState({});
+    const [cousers, setcoUsers] = useState([]);
+    const [singlecoUser, setcoUser] = useState({});
     const [loadForm, setLoadForm] = useState(false);
 
-    async function getUsers() {
-        const res = await axios.get(links["users"]);
-        setUsers(res?.data?.users);
+    async function getcoUsers() {
+        const res = await axios.get(links["cousers"]);
+        setcoUsers(res?.data?.cousers);
         setLoading(false);
 
-        return res?.data?.users;
+        return res?.data?.cousers;
     }
 
-    async function getUser(id) {
-        const res = await axios.get(`${links["user"]}${id}`);
-        setUser(res?.data?.user);
+    async function getcoUser(id) {
+        const res = await axios.get(`${links["cousers"]}/${id}`);
+        setcoUser(res?.data?.couser);
+        toast.success('Found Co-User.');
 
-        return res?.data?.user;
+
+        return res?.data?.couser;
     }
 
     useEffect(() => {
-        getUsers();
+        getcoUsers();
     }, []);
 
     const handleChange = (event) => {
@@ -38,26 +40,29 @@ const CoUsers = () => {
     };
 
     async function handleClick(e) {
-        const user_here = await getUser(e.target.value);
+        const user_here = await getcoUser(e.target.value);
 
         if (user_here) {
             setLoadForm(true);
         } else {
-            toast.error('No user found');
+            toast.error('No co-user found');
         }
     }
 
     async function handleSubmit(e) {
         if (searchTerm) {
-            const user_here = await getUser(searchTerm);
+            console.log(searchTerm);
+            const user_here = await getcoUser(searchTerm);
+
+            console.log(user_here);
 
             if (user_here) {
                 setLoadForm(true);
-                toast.success('Found user');
+                toast.success('Found co-user');
                 return;
             }
 
-            toast.error('No user found');
+            toast.error('No co-user found');
         } else {
             toast.error('Type something to search');
         }
@@ -66,7 +71,7 @@ const CoUsers = () => {
     if (loadForm) {
         return (
             <>
-                <UserForm user={singleUser} heading={'Update a user'} subHeading={'Update'} />
+                <CoUserForm couser={singlecoUser} heading={'Update a co-user'} subHeading={'Update'} />
             </>
         )
     }
@@ -85,7 +90,7 @@ const CoUsers = () => {
                 <TextField
                     id="search"
                     type="search"
-                    label="Search for a user"
+                    label="Search for a co-user"
                     value={searchTerm}
                     onChange={handleChange}
                     onPaste={handleChange}
@@ -107,36 +112,36 @@ const CoUsers = () => {
 
                     <div className='w-11/12 mx-auto mt-14'>
                         <h1 className='text-xl font-semibold mb-2 ml-2'>
-                            LIST OF USERS
+                            LIST OF CO-USERS
                         </h1>
 
                         <table className="table-auto w-full border-2 gap-3">
                             <thead className='border-y-2'>
                                 <tr>
-                                    <th className='font-semibold border-r-2'>Origin</th>
-                                    <th className='font-semibold border-r-2'>CustomerID</th>
+                                    <th className='font-semibold border-r-2'>Customer ID</th>
+                                    <th className='font-semibold border-r-2'>Application ID</th>
                                     <th className='font-semibold border-r-2'>Name</th>
                                     <th className='font-semibold'>DOB</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    users.map((user) => {
+                                    cousers.map((couser) => {
                                         return (
-                                            <tr key={user?.customer_id} className='border-b-2'>
+                                            <tr key={couser?.customer_id} className='border-b-2'>
                                                 <td className='text-center'>
-                                                    {user?.origin}
+                                                    {couser?.customer_id}
                                                 </td>
                                                 <td className='text-center hover:cursor-pointer hover:text-cyan-600' >
-                                                    <button value={user?.customer_id} onClick={(e) => handleClick(e)}>
-                                                        {user?.customer_id}
+                                                    <button value={couser?.application_id} onClick={(e) => handleClick(e)}>
+                                                        {couser?.application_id}
                                                     </button>
                                                 </td>
                                                 <td className='text-center'>
-                                                    {user?.pan_details?.name}
+                                                    {couser?.pan_details?.name}
                                                 </td>
                                                 <td className='text-center'>
-                                                    {user?.dob}
+                                                    {couser?.dob}
                                                 </td>
                                             </tr>
                                         )

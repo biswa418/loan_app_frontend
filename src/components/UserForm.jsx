@@ -384,9 +384,15 @@ export default function UserForm(props) {
                     borderBottom: (t) => `1px solid ${t.palette.divider}`,
                 }}
             >
-                <Toolbar>
+                <Toolbar className='flex justify-between'>
                     <Typography variant="h6" color="inherit" noWrap>
                         {heading}
+                    </Typography>
+
+                    <Typography variant="h6" color="purple" noWrap>
+                        <a href='/' className='text-md'>
+                            back
+                        </a>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -404,7 +410,7 @@ export default function UserForm(props) {
 
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <TextField name="customerId" disabled label="Customer ID" fullWidth variant="standard"
+                            <TextField name="customerId" disabled={subHeading === 'Update' ? true : false} label="Customer ID" fullWidth variant="standard"
                                 value={formData.customerId}
                                 onChange={handleChange}
                             />

@@ -23,10 +23,16 @@ const Users = () => {
     }
 
     async function getUser(id) {
-        const res = await axios.get(`${links["user"]}${id}`);
-        setUser(res?.data?.user);
+        try {
+            const res = await axios.get(`${links["user"]}${id}`);
+            setUser(res?.data?.user);
+            toast.success('Found User.');
 
-        return res?.data?.user;
+            return res?.data?.user;
+
+        } catch (err) {
+            toast.error(err);
+        }
     }
 
     useEffect(() => {

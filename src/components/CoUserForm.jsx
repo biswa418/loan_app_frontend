@@ -9,146 +9,131 @@ import { links } from '../utils';
 import { toast } from 'react-hot-toast';
 
 export default function CoUserForm(props) {
-    const { user, heading, subHeading } = props;
+    const { couser, heading, subHeading } = props;
     const [formData, setFormData] = React.useState({
-        origin: user?.origin ?? '',
-        onboarded_nbfc: user?.onboarded_nbfc ?? '',
-        onboarded_anchor: user?.onboarded_anchor ?? '',
-        onboarded_application: user?.onboarded_application ?? '',
-        country_code: user?.country_code ?? '',
-        gender: user?.gender ?? '',
-        email_id: user?.email_id ?? '',
-        dob: user?.dob ?? '',
-        is_corporate: user?.is_corporate ?? false,
+        application_id: couser?.application_id ?? '',
+        origin: couser?.origin ?? '',
+        country_code: couser?.country_code ?? '',
+        gender: couser?.gender ?? '',
+        email_id: couser?.email_id ?? '',
+        dob: couser?.dob ?? '',
+        customer_type: couser?.customer_type ?? '',
 
-        pan_number: user?.pan_details?.number ?? '',
-        pan_name: user?.pan_details?.name ?? '',
-        pan_father_name: user?.pan_details?.father_name ?? '',
-        pan_masked_aadhar: user?.pan_details?.masked_aadhaar ?? '',
-        pan_aadhar_linked: user?.pan_details?.pan_aadhaar_linked ?? false,
-        pan_aadhaar_matched: user?.pan_details?.pan_aadhaar_matched ?? false,
-        pan_dob: user?.pan_details?.dob ?? '',
-        pan_is_business: user?.pan_details?.is_business ?? false,
-
-        corporate_pan_name: user?.corporate_pan_details?.name ?? '',
-        corporate_pan_number: user?.corporate_pan_details?.number ?? '',
-        corporate_pan_linked_pans: user?.corporate_pan_details?.linked_pans ?? [],
+        pan_number: couser?.pan_details?.number ?? '',
+        pan_type: couser?.pan_details.pan_type ?? '',
+        pan_name: couser?.pan_details?.name ?? '',
+        pan_father_name: couser?.pan_details?.father_name ?? '',
+        pan_masked_aadhar: couser?.pan_details?.masked_aadhaar ?? '',
+        pan_aadhar_linked: couser?.pan_details?.pan_aadhaar_linked ?? false,
+        pan_aadhaar_matched: couser?.pan_details?.pan_aadhaar_matched ?? false,
+        pan_dob: couser?.pan_details?.dob ?? '',
 
         // residential_address: "" ?? '',
-        isAadhaarAddressSame: user?.residential_address?.is_aadhaar_address_same ?? false,
-        address: user?.residential_address?.address ?? '',
-        pincode: user?.residential_address?.pincode ?? '',
-        propertyOwned: user?.residential_address?.property_owned ?? false,
-        city: user?.residential_address?.city ?? '',
-        district: user?.residential_address?.district ?? '',
-        state: user?.residential_address?.state ?? '',
-
-        //permanent address
-        p_address: user?.permanent_address?.address ?? '',
-        p_city: user?.permanent_address?.city ?? '',
-        p_state: user?.permanent_address?.state ?? '',
-        p_district: user?.permanent_address?.district ?? '',
-        p_pincode: user?.permanent_address?.pincode ?? '',
+        isAadhaarAddressSame: couser?.residential_address?.is_aadhaar_address_same ?? false,
+        address: couser?.residential_address?.address ?? '',
+        pincode: couser?.residential_address?.pincode ?? '',
+        propertyOwned: couser?.residential_address?.property_owned ?? false,
+        city: couser?.residential_address?.city ?? '',
+        district: couser?.residential_address?.district ?? '',
+        state: couser?.residential_address?.state ?? '',
 
         //aadhar
-        verificationType: user?.aadhaar_details?.verification_type ?? '',
-        aadhaarName: user?.aadhaar_details?.name ?? '',
-        aadhaarAddress: user?.aadhaar_details?.address ?? '',
-        aadharGender: user?.aadhaar_details?.gender ?? '',
-        aadhar_id: user?.aadhaar_details?.id_number ?? '',
+        verificationType: couser?.aadhaar_details?.verification_type ?? '',
+        aadhaarName: couser?.aadhaar_details?.name ?? '',
+        aadhaarAddress: couser?.aadhaar_details?.address ?? '',
+        aadharGender: couser?.aadhaar_details?.gender ?? '',
+        aadhar_id: couser?.aadhaar_details?.id_number ?? '',
 
         // aadhar address -- more nested
-        aadhar_add_address: user?.aadhaar_details?.address_information?.address ?? '',
-        aadhar_add_pincode: user?.aadhaar_details?.address_information?.pincode ?? '',
-        aadhar_add_state: user?.aadhaar_details?.address_information?.state ?? '',
-        aadhar_add_city: user?.aadhaar_details?.address_information?.city ?? '',
-        aadhar_add_district: user?.aadhaar_details?.address_information?.district ?? '',
+        aadhar_add_address: couser?.aadhaar_details?.address_information?.address ?? '',
+        aadhar_add_pincode: couser?.aadhaar_details?.address_information?.pincode ?? '',
+        aadhar_add_state: couser?.aadhaar_details?.address_information?.state ?? '',
+        aadhar_add_city: couser?.aadhaar_details?.address_information?.city ?? '',
+        aadhar_add_district: couser?.aadhaar_details?.address_information?.district ?? '',
 
         //not nested -- aadhar
-        UID: user?.aadhaar_details?.UID ?? '',
-        ageBand: user?.aadhaar_details?.age_band ?? '',
-        maskedMobileNumber: user?.aadhaar_details?.masked_mobile_number ?? '',
-        isAadhaarAddressOwned: user?.aadhaar_details?.is_aadhaar_address_owned ?? false,
-        aadhar_father_name: user?.aadhaar_details?.father_name ?? '',
-        aadhar_documents: user?.aadhaar_details?.documents ?? '',
-        aadhaarMobileMatched: user?.aadhaar_details?.aadhaar_mobile_matched ?? false,
+        UID: couser?.aadhaar_details?.UID ?? '',
+        ageBand: couser?.aadhaar_details?.age_band ?? '',
+        maskedMobileNumber: couser?.aadhaar_details?.masked_mobile_number ?? '',
+        isAadhaarAddressOwned: couser?.aadhaar_details?.is_aadhaar_address_owned ?? false,
+        aadhar_father_name: couser?.aadhaar_details?.father_name ?? '',
+        aadhaarMobileMatched: couser?.aadhaar_details?.aadhaar_mobile_matched ?? false,
 
         // out of aadhar
-        isPanUploaded: user?.is_pan_uploaded ?? false,
+        isPanUploaded: couser?.is_pan_uploaded ?? false,
+        relation_with_borrower: couser?.relation_with_borrower ?? '',
+        income: couser?.income ?? '',
 
-        //kyc approval
-        kycStatus: user?.kyc_approval_details?.status ?? false,
-        kycRemarks: user?.kyc_approval_details?.remarks ?? '',
-        kyc_embify_user: user?.kyc_approval_details?.embifi_user ?? '',
+        //credit engine
+        ce_age: couser?.credit_engine?.details?.age ?? '',
+        ce_age_status: couser?.credit_engine?.details?.age_status ?? '',
+        ce_crif_pull: couser?.credit_engine?.details?.crif_pull ?? '',
+        ce_crif_score: couser?.credit_engine?.details?.crif_score ?? '',
 
         //other details
-        otherIncome: user?.other_details?.income ?? '',
-        otherEducation: user?.other_details?.education ?? '',
-        otherReferences: user?.other_details?.references ?? '',
-        otherFamily: user?.other_details?.family ?? '',
-        drivingLicenseNumber: user?.other_details?.driving_license_number ?? '',
+        other_remark: couser?.other_details?.remark ?? '',
 
         // normal
-        sms_verified: user?.sms_verified ?? false,
-        creationStage: user?.creation_stage ?? '',
-        onboardingDate: user?.onboarding_date ?? '',
-        customerId: user?.customer_id ?? '',
-        mobile_number: user?.mobile_number ?? '',
+        creationStage: couser?.creation_stage ?? '',
+        onboardingDate: couser?.onboarding_date ?? '',
+        customerId: couser?.customer_id ?? '',
+        mobile_number: couser?.mobile_number ?? '',
     });
 
     const [doc, setDoc] = React.useState({
         //documents -> aadhar back
-        aadhar_back_name: user?.documents?.aadhaar_back?.name ?? '',
-        aadhar_back_category: user?.documents?.aadhaar_back?.category ?? '',
-        aadhar_back_fileLink: user?.documents?.aadhaar_back?.fileLink ?? '',
-        aadhar_back_uploadStatus: user?.documents?.aadhaar_back?.uploadStatus ?? false,
-        aadhar_back_uploadDateMS: user?.documents?.aadhaar_back?.uploadedDateMS ?? '',
-        aadhar_back_error: user?.documents?.aadhaar_back?.error ?? '',
-        aadhar_back_isApproved: user?.documents?.aadhaar_back?.isApproved ?? false,
-        aadhar_back_meta_page_document: user?.documents?.aadhaar_back?.meta_page_document ?? false,
-        aadhar_back_completed: user?.documents?.aadhaar_back?.completed ?? '',
-        aadhar_back_page: user?.documents?.aadhaar_back?.page ?? '',
-        aadhar_back_uploadedFrom: user?.documents?.aadhaar_back?.uploadedFrom ?? '',
+        aadhar_back_name: couser?.documents?.aadhaar_back?.name ?? '',
+        aadhar_back_category: couser?.documents?.aadhaar_back?.category ?? '',
+        aadhar_back_fileLink: couser?.documents?.aadhaar_back?.fileLink ?? '',
+        aadhar_back_uploadStatus: couser?.documents?.aadhaar_back?.uploadStatus ?? false,
+        aadhar_back_uploadDateMS: couser?.documents?.aadhaar_back?.uploadedDateMS ?? '',
+        aadhar_back_error: couser?.documents?.aadhaar_back?.error ?? '',
+        aadhar_back_isApproved: couser?.documents?.aadhaar_back?.isApproved ?? false,
+        aadhar_back_meta_page_document: couser?.documents?.aadhaar_back?.meta_page_document ?? false,
+        aadhar_back_completed: couser?.documents?.aadhaar_back?.completed ?? '',
+        aadhar_back_page: couser?.documents?.aadhaar_back?.page ?? '',
+        aadhar_back_uploadedFrom: couser?.documents?.aadhaar_back?.uploadedFrom ?? '',
 
         // documents -> aadhaar front
-        aadhar_front_name: user?.documents?.aadhaar_front?.name ?? '',
-        aadhar_front_category: user?.documents?.aadhaar_front?.category ?? '',
-        aadhar_front_fileLink: user?.documents?.aadhaar_front?.fileLink ?? '',
-        aadhar_front_uploadStatus: user?.documents?.aadhaar_front?.uploadStatus ?? false,
-        aadhar_front_uploadDateMS: user?.documents?.aadhaar_front?.uploadedDateMS ?? '',
-        aadhar_front_error: user?.documents?.aadhaar_front?.error ?? '',
-        aadhar_front_isApproved: user?.documents?.aadhaar_front?.isApproved ?? false,
-        aadhar_front_meta_page_document: user?.documents?.aadhaar_front?.meta_page_document ?? false,
-        aadhar_front_completed: user?.documents?.aadhaar_front?.completed ?? '',
-        aadhar_front_page: user?.documents?.aadhaar_front?.page ?? '',
-        aadhar_front_uploadedFrom: user?.documents?.aadhaar_front?.uploadedFrom ?? '',
+        aadhar_front_name: couser?.documents?.aadhaar_front?.name ?? '',
+        aadhar_front_category: couser?.documents?.aadhaar_front?.category ?? '',
+        aadhar_front_fileLink: couser?.documents?.aadhaar_front?.fileLink ?? '',
+        aadhar_front_uploadStatus: couser?.documents?.aadhaar_front?.uploadStatus ?? false,
+        aadhar_front_uploadDateMS: couser?.documents?.aadhaar_front?.uploadedDateMS ?? '',
+        aadhar_front_error: couser?.documents?.aadhaar_front?.error ?? '',
+        aadhar_front_isApproved: couser?.documents?.aadhaar_front?.isApproved ?? false,
+        aadhar_front_meta_page_document: couser?.documents?.aadhaar_front?.meta_page_document ?? false,
+        aadhar_front_completed: couser?.documents?.aadhaar_front?.completed ?? '',
+        aadhar_front_page: couser?.documents?.aadhaar_front?.page ?? '',
+        aadhar_front_uploadedFrom: couser?.documents?.aadhaar_front?.uploadedFrom ?? '',
 
         // pan
-        pan_name: user?.documents?.pan?.name ?? '',
-        pan_category: user?.documents?.pan?.category ?? '',
-        pan_fileLink: user?.documents?.pan?.fileLink ?? '',
-        pan_uploadStatus: user?.documents?.pan?.uploadStatus ?? false,
-        pan_uploadDateMS: user?.documents?.pan?.uploadedDateMS ?? '',
-        pan_error: user?.documents?.pan?.error ?? '',
-        pan_isApproved: user?.documents?.pan?.isApproved ?? false,
-        pan_meta_page_document: user?.documents?.pan?.meta_page_document ?? false,
-        pan_completed: user?.documents?.pan?.completed ?? '',
-        pan_page: user?.documents?.pan?.page ?? '',
-        pan_uploadedFrom: user?.documents?.pan?.uploadedFrom ?? '',
+        pan_name: couser?.documents?.pan?.name ?? '',
+        pan_category: couser?.documents?.pan?.category ?? '',
+        pan_fileLink: couser?.documents?.pan?.fileLink ?? '',
+        pan_uploadStatus: couser?.documents?.pan?.uploadStatus ?? false,
+        pan_uploadDateMS: couser?.documents?.pan?.uploadedDateMS ?? '',
+        pan_error: couser?.documents?.pan?.error ?? '',
+        pan_isApproved: couser?.documents?.pan?.isApproved ?? false,
+        pan_meta_page_document: couser?.documents?.pan?.meta_page_document ?? false,
+        pan_completed: couser?.documents?.pan?.completed ?? '',
+        pan_page: couser?.documents?.pan?.page ?? '',
+        pan_uploadedFrom: couser?.documents?.pan?.uploadedFrom ?? '',
 
         // customer photo
-        customer_name: user?.documents?.customer_photo[0]?.name ?? '',
-        customer_category: user?.documents?.customer_photo[0]?.category ?? '',
-        customer_fileLink: user?.documents?.customer_photo[0]?.fileLink ?? '',
-        customer_uploadStatus: user?.documents?.customer_photo[0]?.uploadStatus ?? false,
-        customer_uploadDateMS: user?.documents?.customer_photo[0]?.uploadedDateMS ?? '',
-        customer_error: user?.documents?.customer_photo[0]?.error ?? '',
-        customer_isApproved: user?.documents?.customer_photo[0]?.isApproved ?? false,
-        customer_meta_page_document: user?.documents?.customer_photo[0]?.meta_page_document ?? false,
-        customer_completed: user?.documents?.customer_photo[0]?.completed ?? '',
-        customer_page: user?.documents?.customer_photo[0]?.page ?? '',
-        customer_uploadedFrom: user?.documents?.customer_photo[0]?.uploadedFrom ?? '',
-        customer_rejection_reason: user?.documents?.customer_photo[0]?.rejectionReason ?? '',
+        customer_name: couser?.documents?.co_customer_photo?.[0]?.name ?? '',
+        customer_category: couser?.documents?.co_customer_photo?.[0]?.category ?? '',
+        customer_fileLink: couser?.documents?.co_customer_photo?.[0]?.fileLink ?? '',
+        customer_uploadStatus: couser?.documents?.co_customer_photo?.[0]?.uploadStatus ?? false,
+        customer_uploadDateMS: couser?.documents?.co_customer_photo?.[0]?.uploadedDateMS ?? '',
+        customer_error: couser?.documents?.co_customer_photo?.[0]?.error ?? '',
+        customer_isApproved: couser?.documents?.co_customer_photo?.[0]?.isApproved ?? false,
+        customer_meta_page_document: couser?.documents?.co_customer_photo?.[0]?.meta_page_document ?? false,
+        customer_completed: couser?.documents?.co_customer_photo?.[0]?.completed ?? '',
+        customer_page: couser?.documents?.co_customer_photo?.[0]?.page ?? '',
+        customer_uploadedFrom: couser?.documents?.co_customer_photo?.[0]?.uploadedFrom ?? '',
+        customer_rejection_reason: couser?.documents?.co_customer_photo?.[0]?.rejectionReason ?? '',
+        ...couser
     });
 
     const handleChange = (e) => {
@@ -185,51 +170,40 @@ export default function CoUserForm(props) {
         }
 
         const data = {
+            ...couser,
+            application_id: formData.application_id,
             origin: formData.origin,
-            onboarded_nbfc: formData.onboarded_nbfc,
-            onboarded_anchor: formData.onboarded_anchor,
-            onboarded_application: formData.onboarded_application,
             country_code: formData.country_code,
             gender: formData.gender,
             email_id: formData.email_id === '' ? null : formData.email_id,
             dob: formData.dob,
-            is_corporate: formData.is_corporate,
+            customer_type: formData.customer_type,
             pan_details: {
+                pan_type: formData.pan_type,
                 number: formData.pan_number,
                 name: formData.pan_name,
                 father_name: formData.pan_father_name === '' ? null : formData.pan_father_name,
                 masked_aadhaar: formData.pan_masked_aadhar,
                 pan_aadhaar_linked: formData.pan_aadhar_linked,
                 pan_aadhaar_matched: formData.pan_aadhaar_matched,
-                dob: formData.pan_dob === '' ? null : formData.pan_dob,
-                is_business: formData.pan_is_business
-            },
-            corporate_pan_details: {
-                name: formData.corporate_pan_name === '' ? null : formData.corporate_pan_name,
-                number: formData.corporate_pan_number === '' ? null : formData.corporate_pan_number,
-                linked_pans: formData.corporate_pan_linked_pans
+                date_of_birth: formData.pan_dob === '' ? null : formData.pan_dob,
             },
             residential_address: {
-                is_aadhaar_address_same: formData.isAadhaarAddressSame,
                 address: formData.address,
                 pincode: formData.pincode,
-                property_owned: formData.propertyOwned,
+                state: formData.state,
                 city: formData.city,
                 district: formData.district,
-                state: formData.state
             },
-            permanent_address: {
-                address: formData.p_address === '' ? null : formData.p_address,
-                city: formData.p_city === '' ? null : formData.p_city,
-                state: formData.p_state === '' ? null : formData.p_state,
-                district: formData.p_district === '' ? null : formData.p_district,
-                pincode: formData.p_pincode === '' ? null : formData.p_pincode,
-            },
+            property_owned: formData?.propertyOwned ?? null,
+            creation_stage: formData?.creationStage,
             aadhaar_details: {
                 verification_type: formData.verificationType,
+                is_aadhaar_address_owned: formData.isAadhaarAddressOwned,
                 name: formData.aadhaarName,
                 address: formData.aadhaarAddress,
                 gender: formData.aadharGender,
+                father_name: formData.aadhar_father_name === '' ? null : formData.aadhar_father_name,
                 id_number: formData.aadhar_id,
                 address_information: {
                     address: formData.aadhar_add_address,
@@ -241,42 +215,32 @@ export default function CoUserForm(props) {
                 UID: formData.UID,
                 age_band: formData.ageBand,
                 masked_mobile_number: formData.maskedMobileNumber,
-                is_aadhaar_address_owned: formData.isAadhaarAddressOwned,
-                father_name: formData.aadhar_father_name === '' ? null : formData.aadhar_father_name,
-                documents: formData.aadhar_documents === '' ? null : formData.aadhar_documents,
                 aadhaar_mobile_matched: formData.aadhaarMobileMatched
             },
-            is_pan_uploaded: formData.isPanUploaded,
-            kyc_approval_details: {
-                status: formData.kycStatus,
-                remarks: formData.kycRemarks === '' ? null : formData.kycRemarks,
-                embifi_user: formData.kyc_embify_user === '' ? null : formData.kyc_embify_user
+            relation_with_borrower: formData.relation_with_borrower,
+            income: formData.income === '' ? null : formData.income,
+            education: formData?.education ?? null,
+            credit_engine: {
+                ...couser?.credit_engine,
+                details: {
+                    ...couser?.credit_engine?.details,
+                    NTC_status: couser?.credit_engine?.details?.NTC_status,
+                    aadhaar_distance: couser?.credit_engine?.details?.aadhaar_distance,
+                    aadhaar_master_address: couser?.credit_engine?.details?.aadhaar_master_address,
+                    age: formData?.ce_age,
+                    age_status: formData?.ce_age_status,
+                    crif_pull: formData?.ce_crif_pull,
+                    crif_score: formData?.ce_crif_score,
+                },
             },
             other_details: {
-                income: formData.otherIncome === '' ? null : formData.otherIncome,
-                education: formData.otherEducation === '' ? null : formData.otherEducation,
-                references: formData.otherReferences === '' ? null : formData.otherReferences,
-                family: formData.otherFamily === '' ? null : formData.otherFamily,
-                driving_license_number: formData.drivingLicenseNumber === '' ? null : formData.drivingLicenseNumber
+                remark: formData.other_remark === '' ? null : formData.other_remark,
             },
             sms_verified: formData.sms_verified,
-            creation_stage: formData.creationStage,
             onboarding_date: new Date(formData.onboardingDate),
             customer_id: formData.customerId,
             documents: {
-                aadhaar_back: {
-                    name: doc.aadhar_back_name,
-                    category: doc.aadhar_back_category,
-                    fileLink: doc.aadhar_back_fileLink,
-                    uploadStatus: doc.aadhar_back_uploadStatus,
-                    uploadedDateMS: Number(doc.aadhar_back_uploadDateMS),
-                    error: doc.aadhar_back_error === '' ? null : doc.aadhar_back_error,
-                    isApproved: doc.aadhar_back_isApproved,
-                    meta_page_document: doc.aadhar_back_meta_page_document,
-                    completed: doc.aadhar_back_completed === '' ? null : doc.aadhar_back_completed,
-                    page: doc.aadhar_back_page === '' ? null : doc.aadhar_back_page,
-                    uploadedFrom: doc.aadhar_back_uploadedFrom
-                },
+                ...couser?.documents,
                 aadhaar_front: {
                     name: doc.aadhar_front_name,
                     category: doc.aadhar_front_category,
@@ -289,6 +253,19 @@ export default function CoUserForm(props) {
                     completed: doc.aadhar_front_completed === '' ? null : doc.aadhar_front_completed,
                     page: doc.aadhar_front_page === '' ? null : doc.aadhar_front_page,
                     uploadedFrom: doc.aadhar_front_uploadedFrom
+                },
+                aadhaar_back: {
+                    name: doc.aadhar_back_name,
+                    category: doc.aadhar_back_category,
+                    fileLink: doc.aadhar_back_fileLink,
+                    uploadStatus: doc.aadhar_back_uploadStatus,
+                    uploadedDateMS: Number(doc.aadhar_back_uploadDateMS),
+                    error: doc.aadhar_back_error === '' ? null : doc.aadhar_back_error,
+                    isApproved: doc.aadhar_back_isApproved,
+                    meta_page_document: doc.aadhar_back_meta_page_document,
+                    completed: doc.aadhar_back_completed === '' ? null : doc.aadhar_back_completed,
+                    page: doc.aadhar_back_page === '' ? null : doc.aadhar_back_page,
+                    uploadedFrom: doc.aadhar_back_uploadedFrom
                 },
                 pan: {
                     name: doc.pan_name,
@@ -303,29 +280,24 @@ export default function CoUserForm(props) {
                     page: doc.pan_page === '' ? null : doc.pan_page,
                     uploadedFrom: doc.pan_uploadedFrom
                 },
-                customer_photo: [
+                co_customer_photo: [
                     {
-                        name: doc.customer_name,
-                        category: doc.customer_category,
-                        fileLink: doc.customer_fileLink,
-                        uploadStatus: doc.customer_uploadStatus,
-                        uploadedDateMS: Number(doc.customer_uploadDateMS),
-                        error: doc.customer_error === '' ? null : doc.customer_error,
-                        isApproved: doc.customer_isApproved,
-                        meta_page_document: doc.customer_meta_page_document,
-                        completed: doc.customer_completed === '' ? null : doc.customer_completed,
-                        page: doc.customer_page === '' ? null : doc.customer_page,
-                        uploadedFrom: doc.customer_uploadedFrom,
-                        rejectionReason: doc.customer_rejection_reason
+                        name: doc.co_customer_name,
+                        category: doc.co_customer_category,
+                        fileLink: doc.co_customer_fileLink,
+                        uploadStatus: doc.co_customer_uploadStatus,
+                        uploadedDateMS: Number(doc.co_customer_uploadDateMS),
+                        error: doc.customer_error === "" ? null : doc.co_customer_error,
+                        isApproved: doc.co_customer_isApproved,
+                        meta_page_document: doc.co_customer_meta_page_document,
+                        completed: doc.co_customer_completed === "" ? null : doc.customer_completed,
+                        page: doc.co_customer_page === "" ? null : doc.customer_page,
+                        uploadedFrom: doc.co_customer_uploadedFrom,
+                        rejectionReason: doc.co_customer_rejection_reason
                     }
                 ]
             },
             mobile_number: formData.mobile_number === '' ? null : Number(formData.mobile_number)
-        }
-
-        if (!data.customer_id) {
-            toast.error('Customer ID is required');
-            return;
         }
 
         // make the API call
@@ -333,7 +305,7 @@ export default function CoUserForm(props) {
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: links.createUser,
+                url: links.createcoUser,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -342,18 +314,17 @@ export default function CoUserForm(props) {
 
             try {
                 const reponse = await axios.request(config);
-                toast.success('User has been created successfully.');
+                toast.success('coUser has been created successfully.');
 
             } catch (err) {
                 toast.error(err?.response?.data?.message);
-                // console.log('ere-----', err?.response);
             }
 
         } else if (subHeading === 'Update') {
             let config = {
                 method: 'put',
                 maxBodyLength: Infinity,
-                url: links.updateUser,
+                url: links.updatecoUser,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -362,11 +333,11 @@ export default function CoUserForm(props) {
 
             try {
                 const reponse = await axios.request(config);
-                toast.success('User has been updated successfully.');
+                toast.success('coUser has been updated successfully.');
 
             } catch (err) {
                 toast.error(err?.response?.data?.message);
-                console.log('ere-----', err?.response);
+                // console.log('ere-----', err?.response);
             }
         }
     };
@@ -383,9 +354,15 @@ export default function CoUserForm(props) {
                     borderBottom: (t) => `1px solid ${t.palette.divider}`,
                 }}
             >
-                <Toolbar>
+                <Toolbar className='flex justify-between'>
                     <Typography variant="h6" color="inherit" noWrap>
                         {heading}
+                    </Typography>
+
+                    <Typography variant="h6" color="purple" noWrap>
+                        <a href='/' className='text-md'>
+                            back
+                        </a>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -397,14 +374,20 @@ export default function CoUserForm(props) {
                     </Typography>
 
                     <Typography variant="h6" gutterBottom>
-                        User details
+                        couser details
                     </Typography>
 
 
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <TextField name="customerId" label="Customer ID" fullWidth variant="standard"
+                            <TextField name="customerId" label="Customer ID" disabled={subHeading === 'Update' ? true : false} fullWidth variant="standard"
                                 value={formData.customerId}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField name="application_id" label="Application ID" disabled={subHeading === 'Update' ? true : false} fullWidth variant="standard"
+                                value={formData.application_id}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -414,22 +397,10 @@ export default function CoUserForm(props) {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="onboarded_nbfc" label="Onboarded nbfc" fullWidth variant="standard"
-                                value={formData.onboarded_nbfc}
-                                onChange={handleChange}
-                            />
-                        </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <TextField required name="onboarded_anchor" label="Onboarded anchor" fullWidth variant="standard"
-                                value={formData.onboarded_anchor}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="onboarded_application" label="Onboarded application" fullWidth variant="standard"
-                                value={formData.onboarded_application}
+                            <TextField required name="customer_type" label="Customer type" fullWidth variant="standard"
+                                value={formData.customer_type}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -448,6 +419,7 @@ export default function CoUserForm(props) {
                                     name="gender"
                                     onChange={handleChange}
                                 >
+                                    <MenuItem value={''} disabled>Choose an option</MenuItem>
                                     <MenuItem value={"Male"}>Male</MenuItem>
                                     <MenuItem value={"Female"}>Female</MenuItem>
                                     <MenuItem value={"Others"}>Others</MenuItem>
@@ -467,10 +439,6 @@ export default function CoUserForm(props) {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="is_corporate" checked={formData.is_corporate} onClick={toggleChange} />
-                            <FormLabel>is Corporate?</FormLabel>
-                        </Grid>
 
                         {/* PAN CARD */}
                         <Grid item xs={12} sm={12} sx={{ mt: 5, mb: -2 }}>
@@ -479,36 +447,38 @@ export default function CoUserForm(props) {
                             </Typography>
                         </Grid>
 
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12}>
+                            <TextField required name="pan_type" label="PAN Type" fullWidth variant="standard"
+                                value={formData.pan_type}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextField required name="pan_number" label="PAN Number" fullWidth variant="standard"
                                 value={formData.pan_number}
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12}>
                             <TextField required name="pan_name" label="Name on PAN" fullWidth variant="standard"
                                 value={formData.pan_name}
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12}>
                             <TextField name="pan_father_name" label="Father's Name" fullWidth variant="standard"
                                 value={formData.pan_father_name}
                                 onChange={handleChange}
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <Checkbox name="pan_aadhar_linked" checked={formData.pan_aadhar_linked} onClick={toggleChange} />
                             <FormLabel>PAN Aadhar Linked</FormLabel>
                         </Grid>
-                        <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <Checkbox name="pan_aadhaar_matched" checked={formData.pan_aadhaar_matched} onClick={toggleChange} />
                             <FormLabel>PAN Aadhar Matched</FormLabel>
-                        </Grid>
-                        <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="pan_is_business" checked={formData.pan_is_business} onClick={toggleChange} />
-                            <FormLabel>PAN is Business</FormLabel>
                         </Grid>
                         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <TextField name="pan_dob" label="DOB" fullWidth variant="standard"
@@ -516,34 +486,6 @@ export default function CoUserForm(props) {
                                 onChange={handleChange}
                             />
                         </Grid>
-
-
-                        {/* CORPORATE PAN */}
-                        <Grid item xs={12} sm={12} sx={{ mt: 5, mb: -2 }}>
-                            <Typography variant="h6" gutterBottom>
-                                Corporate PAN Cards details
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField name="corporate_pan_number" label="Corporate PAN Number" fullWidth variant="standard"
-                                value={formData.corporate_pan_number}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField name="corporate_pan_name" label="Corporate PAN Name" fullWidth variant="standard"
-                                value={formData.corporate_pan_name}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField name="corporate_pan_linked_pans" label="Corporate PAN linked PANs" fullWidth variant="standard"
-                                value={formData.corporate_pan_linked_pans?.[0]}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-
 
                         {/* Permanent Address */}
                         <Grid item xs={12} sx={{ mt: 5, mb: -2 }}>
@@ -591,44 +533,6 @@ export default function CoUserForm(props) {
                             />
                         </Grid>
 
-                        {/* Permanent Address */}
-                        <Grid item xs={12} sx={{ mt: 5, mb: -2 }}>
-                            <Typography variant="h6" gutterBottom>
-                                Permanent Address
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField required name="p_address" label="Address" fullWidth variant="standard"
-                                value={formData.p_address}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="p_pincode" label="Pincode" fullWidth variant="standard"
-                                value={formData.p_pincode}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="p_city" label="City" fullWidth variant="standard"
-                                value={formData.p_city}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="p_district" label="District" fullWidth variant="standard"
-                                value={formData.p_district}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField required name="p_state" label="State" fullWidth variant="standard"
-                                value={formData.p_state}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-
                         {/* Aadhar */}
                         <Grid item xs={12} sx={{ mt: 5, mb: -2 }}>
                             <Typography variant="h6" gutterBottom>
@@ -662,9 +566,10 @@ export default function CoUserForm(props) {
                                     name="aadharGender"
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value={"MALE"}>Male</MenuItem>
-                                    <MenuItem value={"FEMALE"}>Female</MenuItem>
-                                    <MenuItem value={"OTHERS"}>Others</MenuItem>
+                                    <MenuItem value={''} disabled>Choose an option</MenuItem>
+                                    <MenuItem value={"Male"}>Male</MenuItem>
+                                    <MenuItem value={"Female"}>Female</MenuItem>
+                                    <MenuItem value={"Others"}>Others</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -736,37 +641,76 @@ export default function CoUserForm(props) {
                             <FormLabel>Is Aadhar address owned</FormLabel>
                         </Grid>
 
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12}>
                             <TextField name="aadhar_father_name" label="(Aadhar) Father Name" fullWidth variant="standard"
                                 value={formData.aadhar_father_name}
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField name="aadhar_documents" label="Aadhar Documents" fullWidth variant="standard"
-                                value={formData.aadhar_documents}
+
+
+                        {/* other details */}
+                        <Grid item xs={12} sx={{ mt: 5, mb: -2 }}>
+                            <Typography variant="h6" gutterBottom>
+                                Other details
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="relation_with_borrower" label="Relationship with borrower" fullWidth variant="standard"
+                                value={formData.relation_with_borrower}
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="aadhaarMobileMatched" checked={formData.aadhaarMobileMatched} onClick={toggleChange} />
-                            <FormLabel>Is Aadhar address owned</FormLabel>
+                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="income" label="Income" fullWidth variant="standard"
+                                value={formData.income}
+                                onChange={handleChange}
+                            />
                         </Grid>
 
                         <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="isPanUploaded" checked={formData.isPanUploaded} onClick={toggleChange} />
-                            <FormLabel>Is PAN uploaded</FormLabel>
-                        </Grid>
-                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="kycStatus" checked={formData.kycStatus} onClick={toggleChange} />
-                            <FormLabel>KYC Status</FormLabel>
+                            <TextField name="ce_age" label="Credit engine age" fullWidth variant="standard"
+                                value={formData.ce_age}
+                                onChange={handleChange}
+                            />
                         </Grid>
 
                         <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Checkbox name="sms_verified" checked={formData.sms_verified} onClick={toggleChange} />
-                            <FormLabel>SMS Verified</FormLabel>
+                            <TextField name="ce_age_status" label="Credit engine age status" fullWidth variant="standard"
+                                value={formData.ce_age_status}
+                                onChange={handleChange}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="ce_crif_pull" label="CRIF pull" fullWidth variant="standard"
+                                value={formData.ce_crif_pull}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="ce_crif_score" label="CRIF score" fullWidth variant="standard"
+                                value={formData.ce_crif_score}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="onboardingDate" label="Onboarding date" fullWidth variant="standard"
+                                value={formData.onboardingDate}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <TextField name="other_remark" label="Other remarks" fullWidth variant="standard"
+                                value={formData.other_remark}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <TextField name="creationStage" label="Creation Stage" fullWidth variant="standard"
                                 value={formData.creationStage}
                                 onChange={handleChange}
