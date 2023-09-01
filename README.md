@@ -1,8 +1,43 @@
-# React + Vite
+# Loan audit application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Audit the application, users and co-users for a loan application. Each update to anything in the app will be getting audited which you can see getting stored to our database in the shown format. This is stored against the customerID for which the changes happened.
 
-Currently, two official plugins are available:
+<code>
+    - updateAt
+    - field
+    - oldValue
+    - newValue
+</code>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+Complete tech stack
+
+Nodejs
+Reactjs
+MongoDB
+Expressjs
+TailwindCSS
+Material UI
+
+
+find all the dependencies from <code>package.json</code> file.
+
+
+## How to setup
+
+    1. Download the code and run <code>npm install</code> inside the base folder. (will install all the dependencies.)
+    2. run <code>npm run dev</code>
+
+## Screeenshots
+
+### Home page
+<img src='/public/sc/home_page.jpg' alt='home_page'>
+
+### Users
+<img src='/public/sc/users.jpg' alt='users'>
+
+### Audits
+<img src='/public/sc/audits.jpg' alt='audits'>
+
+
+

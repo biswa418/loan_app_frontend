@@ -41,7 +41,7 @@ const Home = () => {
 
                     <div className='flex mt-8 justify-between'>
                         <Card className='w-1/4 h-28 pb-2 items-center flex flex-col' >
-                            <a href='/users/create' className='h-1/2 w-1/4 mt-4 '>
+                            <a href='/users/create' className='h-1/2 w-1/4 mt-4 hover:scale-110 transition-all'>
                                 <FaUserCircle className='h-full text-4xl text-purple-500' />
                                 <h2 className='text-sm whitespace-nowrap'>
                                     User
@@ -49,7 +49,7 @@ const Home = () => {
                             </a>
                         </Card>
                         <Card className='w-1/4 h-28 pb-2 items-center justify-center flex flex-col'>
-                            <a href='/couser/create' className='h-1/2 mb-5 ml-1'>
+                            <a href='/couser/create' className='h-1/2 mb-5 ml-1 hover:scale-110 transition-all'>
                                 <FaUserEdit className='h-full text-4xl mx-auto text-purple-500' />
                                 <h2 className='text-sm whitespace-nowrap'>
                                     Co-User
@@ -57,7 +57,7 @@ const Home = () => {
                             </a>
                         </Card>
                         <Card className='w-1/4 h-28 pb-2 items-center justify-center flex flex-col'>
-                            <a href='/apps/create' className='h-1/2 mb-5 ml-1'>
+                            <a href='/apps/create' className='h-1/2 mb-5 ml-1 hover:scale-110 transition-all'>
                                 <FaDochub className='h-full text-4xl mx-auto text-purple-500' />
                                 <h2 className='text-sm whitespace-nowrap'>
                                     Application
